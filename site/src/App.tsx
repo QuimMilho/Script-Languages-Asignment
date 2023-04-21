@@ -3,21 +3,20 @@ import {
     Route,
     BrowserRouter as Router,
     Routes,
-    Outlet,
 } from "react-router-dom";
 import "./styles/global.scss";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "./components/page/Nav";
+import Footer from "./components/page/Footer";
+import SinglePlayer from "./pages/SinglePlayer";
 
 export default function (props: {}) {
-    const apiURL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`;
-    console.log("teste");
+    const apiURL = 'https://quimmilho.net:600';
     return (
         <div className="App">
             <Router>
                 <Nav />
                 <Routes>
-                    <Route path="/" element={<div className="body" />}></Route>
+                    <Route path="/" element={<SinglePlayer />}></Route>
                     <Route
                         path="/online"
                         element={<div className="body"></div>}

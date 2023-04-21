@@ -1,0 +1,71 @@
+$primary-color: #313338;
+$secondary-color: #1e1f22;
+
+.select {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 80%;
+    margin: 10px auto;
+    position: relative;
+
+    .selected {
+        display: flex;
+        padding: 10px;
+        background-color: darken($color: $primary-color, $amount: 5%);
+        border: solid white 2px;
+        border-radius: 10px;
+        position: relative;
+
+        .multipleValue {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            div {
+                border: solid white 2px;
+                margin-right: 5px;
+                border-radius: 5px;
+                font-size: 10px;
+                padding: 5px;
+                z-index: 1;
+
+                img {
+                    width: 10px;
+                }
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .images {
+            margin-left: auto;
+        }
+
+        img {
+            margin-left: 5px;
+        }
+    }
+
+    .options {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 50px;
+        background-color: darken($color: $primary-color, $amount: 5%);
+        border: solid white 2px;
+        border-radius: 10px;
+        width: 100%;
+
+        div {
+            margin: 5px;
+            padding: 5px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

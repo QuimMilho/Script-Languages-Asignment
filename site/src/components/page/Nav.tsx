@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import "../styles/nav_fot.scss";
+import "../../styles/nav_fot.scss";
 
 export default function (props: {}) {
     const navigate = useNavigate();
     return (
         <div className="nav">
             <a href="https://isec.pt">
-                <img src="isec.png" height={"100px"} />
+                <img src="/isec.png" height={"100px"} />
             </a>
 
             <ul>

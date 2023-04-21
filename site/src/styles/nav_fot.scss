@@ -6,7 +6,7 @@ $secondary-color: #1e1f22;
     flex-direction: column;
     background-color: $secondary-color;
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: 650px) {
         flex-direction: row;
     }
 
@@ -17,7 +17,7 @@ $secondary-color: #1e1f22;
         display: flex;
         flex-direction: column;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 650px) {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 50px 50px;
@@ -41,7 +41,7 @@ $secondary-color: #1e1f22;
             width: 250px;
             text-align: center;
 
-            @media screen and (min-width: 600px) {
+            @media screen and (min-width: 650px) {
                 margin-bottom: 0;
                 width: 150px;
             }
@@ -63,7 +63,7 @@ $secondary-color: #1e1f22;
     a {
         margin: 0 auto;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 650px) {
             margin: 10px;
         }
     }
