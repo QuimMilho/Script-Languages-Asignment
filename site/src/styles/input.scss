@@ -1,5 +1,9 @@
 $primary-color: #313338;
 $secondary-color: #1e1f22;
+$red: #d03a3d;
+$green: #368044;
+$blue: #5e66f4;
+$gray: #50545c;
 
 .select {
     display: flex;
@@ -67,5 +71,38 @@ $secondary-color: #1e1f22;
                 cursor: pointer;
             }
         }
+    }
+}
+
+.button {
+    margin: 10px auto;
+    max-width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.blue {
+        background-color: $blue;
+        border: solid darken($blue, 5%) 2px;
+    }
+
+    &.red {
+        background-color: $red;
+        border: solid darken($red, 5%) 2px;
+    }
+
+    &.green {
+        background-color: $green;
+        border: solid darken($green, 5%) 2px;
+    }
+
+    &.gray {
+        background-color: $gray;
+        border: solid darken($gray, 5%) 2px;
     }
 }

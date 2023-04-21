@@ -1,7 +1,9 @@
+import { JsxElement } from "typescript";
 import Tab from "../components/game/Tab";
 import Select from "../components/input/Select";
 import { createTab } from "../utils";
 import { useState } from "react";
+import Button from "../components/input/Button";
 
 export default function (props: {}) {
     const [tab, setTab] = useState(createTab());
@@ -16,11 +18,20 @@ export default function (props: {}) {
                 ]}
                 clearable={false}
             />
+            <Button
+                color="red"
+                text="Novo Jogo!"
+                width={200}
+                onClick={() => {
+                    setTab(createTab());
+                    setPlayer(1, setJog);
+                }}
+            />
             <Tab
                 nextPlayer={jog}
                 tab={tab}
-                onChange={(tab) => {
-                    setTab(tab);
+                onChange={(t) => {
+                    setTab(t);
                     setPlayer(jog === 1 ? 2 : 1, setJog);
                 }}
             />
