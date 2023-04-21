@@ -1,0 +1,62 @@
+$primary-color: #313338;
+$secondary-color: #1e1f22;
+$red: #d03a3d;
+$green: #368044;
+$blue: #5e66f4;
+
+.tabuleiro {
+    width: 297px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 99px);
+    grid-template-rows: repeat(3, 99px);
+    padding: 10px;
+    border-radius: 10px;
+    background-color: $secondary-color;
+
+    .smallTab {
+        padding: 5px;
+        border-radius: 5px;
+        display: grid;
+        grid-template-columns: repeat(3, 29px);
+        grid-template-rows: repeat(3, 29px);
+        border: solid white 1px;
+
+        div {
+            border-radius: 3px;
+            margin: 2px;
+        }
+    }
+
+    .selected {
+        background-color: $green;
+    }
+
+    .redPlaceholder {
+        background-color: $primary-color;
+        &:hover {
+            background-color: lighten($red, 10%);
+            cursor: pointer;
+        }
+    }
+
+    .bluePlaceholder {
+        background-color: $primary-color;
+        &:hover {
+            background-color: lighten($blue, 10%);
+            cursor: pointer;
+        }
+    }
+
+    .piece {
+        background-color: $primary-color;
+    }
+
+    .redPiece {
+        background-color: $red;
+    }
+
+    .bluePiece {
+        background-color: $blue;
+    }
+}
