@@ -29,18 +29,18 @@ export default function (props: {}) {
                 <li
                     className="white text bold"
                     onClick={() => {
-                        navigate("/pontuacao");
+                        navigate("/computador");
                     }}
                 >
-                    Pontuações
+                    Computador
                 </li>
                 <li
                     className="white text bold"
                     onClick={() => {
-                        navigate("/relatorio");
+                        navigate("/pontuacao");
                     }}
                 >
-                    Relatório
+                    Pontuações
                 </li>
             </ul>
         </div>

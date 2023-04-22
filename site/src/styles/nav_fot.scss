@@ -45,7 +45,7 @@ $secondary-color: #1e1f22;
                 margin-bottom: 0;
                 width: 150px;
             }
-            
+
             @media screen and (min-width: 1000px) {
                 grid-row: 2/3;
             }
@@ -82,12 +82,17 @@ $secondary-color: #1e1f22;
         list-style-type: none;
 
         &.parent {
-            display: flex;
-            flex-direction: column;
             margin: 5px;
+        }
+    }
 
-            @media screen and (min-width: 600px) {
-            }
+    .relatorio {
+        padding: 10px;
+        width: 200px;
+        margin: 20px auto 0px auto;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 }

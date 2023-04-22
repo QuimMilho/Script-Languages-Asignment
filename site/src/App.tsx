@@ -26,6 +26,10 @@ export default function (props: {}) {
                         element={<div className="body"></div>}
                     ></Route>
                     <Route
+                        path="/computador"
+                        element={<div className="body"></div>}
+                    ></Route>
+                    <Route
                         path="/relatorio"
                         element={<div className="body"></div>}
                     ></Route>

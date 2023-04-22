@@ -9,6 +9,7 @@ $gray: #50545c;
     display: flex;
     flex-direction: column;
     min-width: 300px;
+    width: 80%;
     max-width: 80%;
     margin: 10px auto;
     position: relative;
@@ -104,5 +105,40 @@ $gray: #50545c;
     &.gray {
         background-color: $gray;
         border: solid darken($gray, 5%) 2px;
+    }
+}
+
+.textInput {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    input {
+        padding: 10px;
+        background-color: darken($color: $primary-color, $amount: 5%);
+        border-radius: 10px;
+        margin: 10px auto;
+        min-width: 300px;
+        width: 80%;
+        max-width: 80%;
+        color: white;
+
+        &.whiteBorder {
+            border: solid white 2px;
+        }
+
+        &.redBorder {
+            border: solid $red 2px;
+        }
+    }
+
+    div {
+        position: absolute;
+        top: 60px;
+        background-color: $secondary-color;
+        color: #d03a3d;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
     }
 }
