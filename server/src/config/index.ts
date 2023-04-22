@@ -126,20 +126,20 @@ export class Config {
             url = "http://localhost:3000";
             this.logger.info("Using default server url");
         }
-        let port = this.logger.getInfo("Insert server port [3000]");
+        let port = this.logger.getInfo("Insert server port [600]");
         if (port.length === 0) {
-            port = "3000";
+            port = "600";
             this.logger.info("Using default server port");
         }
-        const httpsStr = this.logger.getInfo("HTTPS? [y/N]");
+        const httpsStr = this.logger.getInfo("HTTPS? [Y/n]");
         let https: boolean;
         if (httpsStr.length === 0) {
-            this.logger.info("Using http server protocol");
-            https = false;
-        } else if (httpsStr === "Y" || httpsStr === "y") {
+            this.logger.info("Using https server protocol");
             https = true;
-        } else {
+        } else if (httpsStr === "N" || httpsStr === "n") {
             https = false;
+        } else {
+            https = true;
         }
         this.config.server = { https, port: parseInt(port), url };
     }
@@ -155,14 +155,14 @@ export class Config {
             port = "3306";
             this.logger.info("Using default database port");
         }
-        let database = this.logger.getInfo("Insert database name [server]");
+        let database = this.logger.getInfo("Insert database name [ls]");
         if (database.length === 0) {
-            database = "server";
+            database = "ls";
             this.logger.info("Using default database name");
         }
-        let user = this.logger.getInfo("Insert database username [server]");
+        let user = this.logger.getInfo("Insert database username [ls]");
         if (user.length === 0) {
-            user = "server";
+            user = "ls";
             this.logger.info("Using default database username");
         }
         let password = this.logger.getInfo("Insert database password");
