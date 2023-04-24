@@ -13,7 +13,7 @@ export default function (props: {}) {
     >("newnormal");
     const [tab, setTab] = useState<number[][]>(createTab());
     const [jog, setJog] = useState<number>(1);
-    const [nextTab, setNextTab] = useState<number | undefined>(undefined);
+    const [nextTab, setNextTab] = useState<number | undefined>(4);
     const [ended, setEnded] = useState<number>(0);
     const [nomes, setNomes] = useState<string[]>(["", ""]);
     const [error, setError] = useState<(string | undefined)[]>([
