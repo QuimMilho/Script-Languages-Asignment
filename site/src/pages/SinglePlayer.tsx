@@ -1,10 +1,16 @@
 import Select from "../components/input/Select";
-import { createTab, getSimplifiedTab, verifyFull, verifyGame } from "../utils";
+import {
+    createTab,
+    getSimplifiedTab,
+    verifyFull,
+    verifyGame,
+} from "../utils";
 import { useState } from "react";
 import Button from "../components/input/Button";
 import "../styles/game.scss";
 import Tab from "../components/game/Tab";
 import TextInput from "../components/input/TextInput";
+import Timer from "../components/input/Timer";
 
 export default function (props: {}) {
     const [mode, setMode] = useState<"normal" | "hard">("normal");
@@ -22,6 +28,14 @@ export default function (props: {}) {
     ]);
     return (
         <div className="body singlePlayer">
+            <Timer
+                time={300}
+                ended={ended ? true : false}
+                onTick={(t) => {
+                    console.log(`t: ${t}`)
+                    if (t === 0) setEnded(2);
+                }}
+            />
             <div className="modeSelector">
                 <Select
                     options={[
@@ -66,14 +80,23 @@ export default function (props: {}) {
                         ) : (
                             <span className="white">Foi empate!</span>
                         )}
-                        <br /><br />
-                        <Button text="Jogar Novamente" color="green" width={150} onClick={() => {
-                            setActiveMode(mode);
-                            setPlayer(Math.floor(Math.random() * 2) + 1, setJog);
-                            newTab(setTab);
-                            resetSelectedTab(mode, setNextTab);
-                            setEnd(0, setEnded);
-                        }} />
+                        <br />
+                        <br />
+                        <Button
+                            text="Jogar Novamente"
+                            color="green"
+                            width={150}
+                            onClick={() => {
+                                setActiveMode(mode);
+                                setPlayer(
+                                    Math.floor(Math.random() * 2) + 1,
+                                    setJog
+                                );
+                                newTab(setTab);
+                                resetSelectedTab(mode, setNextTab);
+                                setEnd(0, setEnded);
+                            }}
+                        />
                     </div>
                 ) : (
                     <div className="info">
