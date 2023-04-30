@@ -142,3 +142,18 @@ $gray: #50545c;
         border-radius: 10px;
     }
 }
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px auto;
+
+    .timeDisplay {
+        padding: 10px;
+        max-width: 50px;
+        background-color: white;
+        margin: 10px auto;
+        border-radius: 7px;
+    }
+}
