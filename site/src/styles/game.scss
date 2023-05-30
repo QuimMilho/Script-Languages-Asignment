@@ -61,40 +61,24 @@ $blue: #5e66f4;
     }
 }
 
-.singlePlayer {
+.modeSelector {
     display: flex;
     flex-direction: column;
 
-    .modeSelector {
-        display: flex;
-        flex-direction: column;
-
-        @media screen and (min-width: 650px) {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-        }
+    @media screen and (min-width: 650px) {
+        display: grid;
+        grid-template-columns: 1fr 300px;
     }
+}
 
-    .playerNames {
-        max-width: 800px;
-        margin: 20px auto 0 auto ;
-    }
+.playerNames {
+    max-width: 800px;
+    margin: 20px auto 0 auto;
+}
 
-    .info {
-        margin-top: 20px;
-        text-align: center;
-
-        h2 {
-            margin-top: 20px;
-        }
-
-        .red {
-            color: $red;
-        }
-        .blue {
-            color: $blue;
-        }
-    }
+.singlePlayer {
+    display: flex;
+    flex-direction: column;
 
     .tabuleiroSingle {
         display: flex;
@@ -104,5 +88,15 @@ $blue: #5e66f4;
             display: grid;
             grid-template-columns: 30% 40% 30%;
         }
+    }
+}
+
+.computer {
+    display: flex;
+    flex-direction: column;
+
+    .tabuleiroComp {
+        display: flex;
+        flex-direction: column;
     }
 }

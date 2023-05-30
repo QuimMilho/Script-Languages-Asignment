@@ -19,7 +19,7 @@ export interface Game {
     jog2: string;
     result: number;
     gameId: number;
-    type: "computer" | "local" | "online";
+    type: 'computer' | 'local';
 }
 
 const logger = new Logger(`${process.cwd()}/logs`);

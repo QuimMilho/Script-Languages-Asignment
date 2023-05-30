@@ -15,4 +15,6 @@ export type gameInfo = {
     player: number;
     nextTab: number | undefined;
     ended: number;
+    nome1: string;
+    nome2: string;
 };

@@ -6,6 +6,7 @@ export default function (props: {
     nomes: string[];
     onChange: (v: string[]) => void;
     startGame: () => void;
+    bot?: boolean;
 }) {
     const [error, setError] = useState<string[]>(['', '']);
     return (
@@ -31,6 +32,7 @@ export default function (props: {
                 }}
                 value={props.nomes[1]}
                 error={error[1]}
+                disabled={props.bot}
             />
             <div className='margintop20'>
                 <Button
@@ -44,7 +46,7 @@ export default function (props: {
                                 '',
                             ]);
                         }
-                        if (props.nomes[1].length <= 3) {
+                        if (!props.bot && props.nomes[1].length <= 3) {
                             return setError([
                                 '',
                                 'O nome deve ter pelo menos 3 caracteres!',

@@ -5,6 +5,7 @@ export default function (props: {
     onChange?: (str: string) => void;
     maxLength?: number;
     error?: string;
+    disabled?: boolean;
 }) {
     return (
         <div className="textInput">
@@ -15,7 +16,8 @@ export default function (props: {
                     if (props.onChange) props.onChange(e.target.value);
                 }}
                 value={props.value}
-                maxLength={props.maxLength}
+                maxLength={props.maxLength} 
+                disabled={props.disabled}
             />
             {props.error ? <div className="red">{props.error}</div> : undefined}
         </div>

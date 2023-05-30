@@ -1,4 +1,4 @@
-import {modes, gameInfo} from './types'
+import { modes, gameInfo } from './types';
 
 export function createTab(): number[][] {
     let temp: number[][] = [];
@@ -14,9 +14,9 @@ export function createTab(): number[][] {
 }
 
 export function generateRandomId(size: number) {
-    let result = "";
+    let result = '';
     const charSet =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (let i = 0; i < size; i++) {
         result += charSet.charAt(Math.floor(Math.random() * charSet.length));
     }
@@ -122,12 +122,112 @@ export function getSimplifiedTab(smallTab: number[]) {
     return tempTab;
 }
 
-export function createGame(mode: modes): gameInfo {
+export function createGame(
+    mode: modes,
+    nome1: string = '',
+    nome2: string = ''
+): gameInfo {
     return {
         ended: 0,
         mode,
         nextTab: mode === 'hard' ? 4 : undefined,
-        player: 1,
+        player: Math.floor(Math.random() * 2) + 1,
         tab: createTab(),
+        nome1,
+        nome2,
     };
+}
+
+export function move(
+    jogo: gameInfo,
+    tab: number[][],
+    pos: number,
+    nextPlayer?: number
+) {
+    const game = { ...jogo };
+    game.player = nextPlayer ? nextPlayer : game.player > 1 ? 1 : 2;
+    game.ended = verifyGame(tab, (v) => {
+        game.tab = v;
+    });
+    if (game.mode === 'hard') {
+        game.nextTab = (pos - 1) % 9;
+        if (verifyFull(getSimplifiedTab(game.tab[game.nextTab]))) {
+            do {
+                game.nextTab = Math.floor(Math.random() * 9);
+            } while (verifyFull(getSimplifiedTab(game.tab[game.nextTab])));
+        }
+    }
+    return game;
+}
+
+export async function computerPlay(
+    jogo: gameInfo,
+    setJogo: (j: gameInfo) => void
+) {
+    if (jogo.mode === 'new') return;
+    let n;
+    if (jogo.nextTab !== undefined) {
+        const st = jogo.tab[jogo.nextTab];
+        n = Math.floor(Math.random() * countAvailableSmall(st));
+        for (let i = 0; i <= n; i++) {
+            if (Math.floor(st[i] / 100) !== 0) {
+                n++;
+            }
+        }
+        n = jogo.nextTab * 9 + n;
+    } else {
+        n = Math.floor(Math.random() * countAvailable(jogo.tab));
+        for (let i = 0; i <= n; i++) {
+            if (Math.floor(jogo.tab[Math.floor(i / 9)][i % 9] / 100) !== 0) {
+                n++;
+            }
+        }
+    }
+    const tab = [...jogo.tab];
+    tab[Math.floor(n / 9)][n % 9] += 200;
+    const j = move(jogo, tab, n + 1);
+    setJogo(j);
+}
+
+export function computerPlaySync(jogo: gameInfo): gameInfo {
+    if (jogo.mode === 'new') return jogo;
+    let n;
+    if (jogo.nextTab !== undefined) {
+        const st = jogo.tab[jogo.nextTab];
+        n = Math.floor(Math.random() * countAvailableSmall(st));
+        for (let i = 0; i <= n; i++) {
+            if (Math.floor(st[i] / 100) !== 0) {
+                n++;
+            }
+        }
+        n = jogo.nextTab * 9 + n;
+    } else {
+        n = Math.floor(Math.random() * countAvailable(jogo.tab));
+        for (let i = 0; i <= n; i++) {
+            if (Math.floor(jogo.tab[Math.floor(i / 9)][i % 9] / 100) !== 0) {
+                n++;
+            }
+        }
+    }
+    const tab = [...jogo.tab];
+    tab[Math.floor(n / 9)][n % 9] += 200;
+    const j = move(jogo, tab, n + 1);
+    return j;
+}
+
+export function countAvailable(tab: number[][]): number {
+    let k = 81;
+    for (let h = 0; h < 9; h++)
+        for (let i = 0; i < 9; i++) {
+            if (Math.floor(tab[h][i] / 100)) k--;
+        }
+    return k;
+}
+
+export function countAvailableSmall(tab: number[]): number {
+    let k = 9;
+    for (let i = 0; i < 9; i++) {
+        if (Math.floor(tab[i] / 100) !== 0) k--;
+    }
+    return k;
 }
