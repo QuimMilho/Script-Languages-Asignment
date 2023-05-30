@@ -95,4 +95,14 @@ $blue: #5e66f4;
             color: $blue;
         }
     }
+
+    .tabuleiroSingle {
+        display: flex;
+        flex-direction: column;
+
+        @media screen and (min-width: 800px) {
+            display: grid;
+            grid-template-columns: 30% 40% 30%;
+        }
+    }
 }

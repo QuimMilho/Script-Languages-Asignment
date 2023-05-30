@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 
 interface TimerProps {
     time: number;
-    ended: boolean;
+    paused: boolean;
     onTick: (n: number) => void;
+    ended: boolean;
     label?: string;
 }
 interface TimerState {
@@ -15,20 +16,21 @@ export default class extends React.Component<TimerProps, TimerState> {
 
     constructor(props: TimerProps) {
         super(props);
-        this.state = {time: this.props.time};
+        this.state = { time: this.props.time };
         this.startTimer();
     }
 
     render() {
         return (
-            <div className="timer">
-                <span className="white">
-                    {this.props.label ? this.props.label : "Tempo restante:"}
+            <div className='timer'>
+                <span className='white'>
+                    {this.props.label ? this.props.label : 'Tempo restante:'}
                 </span>
-                <div className="timeDisplay">
-                    {Math.floor(this.state.time / 60)} :{" "}
-                    {Math.floor((this.state.time % 60) / 10)}
-                    {(this.state.time % 60) % 10}
+                <div className='timeDisplay'>
+                    {Math.floor(this.state.time / 600)}:
+                    {Math.floor((this.state.time % 600) / 100)}
+                    {Math.floor(((this.state.time % 600) % 100) / 10)}.
+                    {this.state.time % 10}
                 </div>
             </div>
         );
@@ -36,13 +38,16 @@ export default class extends React.Component<TimerProps, TimerState> {
 
     private startTimer() {
         this.it = setInterval(() => {
-            if (!this.props.ended) {
-                this.props.onTick(this.state.time - 1);
-                this.setState({ time: this.state.time - 1 });
-            } else {
-                this.stopTimer();
+            if (this.props.ended) {
+                return this.stopTimer();
             }
-        }, 1000);
+            if (!this.props.paused) {
+                const t = this.state.time - 1;
+                if (t === 0) this.stopTimer();
+                this.props.onTick(t);
+                this.setState({ time: t});
+            }
+        }, 100);
     }
 
     private stopTimer() {

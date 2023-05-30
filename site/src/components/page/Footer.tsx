@@ -5,14 +5,6 @@ export default function (props: {}) {
     const navigate = useNavigate();
     return (
         <div className="footer">
-            <div
-                className="white centered bold relatorio"
-                onClick={() => {
-                    navigate("/relatorio");
-                }}
-            >
-                Relatório
-            </div>
             <div className="membros">
                 <ul>
                     <li className="white bold centered">Desenvolvido por:</li>

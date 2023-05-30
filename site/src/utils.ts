@@ -1,3 +1,5 @@
+import {modes, gameInfo} from './types'
+
 export function createTab(): number[][] {
     let temp: number[][] = [];
     let t: number[] = [];
@@ -118,4 +120,14 @@ export function getSimplifiedTab(smallTab: number[]) {
         tempTab.push(Math.floor(smallTab[h] / 100));
     }
     return tempTab;
+}
+
+export function createGame(mode: modes): gameInfo {
+    return {
+        ended: 0,
+        mode,
+        nextTab: mode === 'hard' ? 4 : undefined,
+        player: 1,
+        tab: createTab(),
+    };
 }

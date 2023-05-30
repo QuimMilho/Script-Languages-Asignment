@@ -1,5 +1,5 @@
-import "../../styles/game.scss";
-import { generateRandomId } from "../../utils";
+import '../../styles/game.scss';
+import { generateRandomId } from '../../utils';
 
 export default function (props: {
     tab: number[][];
@@ -10,15 +10,15 @@ export default function (props: {
 }) {
     let i = 0;
     return (
-        <div className="tabuleiro">
+        <div className='tabuleiro'>
             {props.tab.map((t) => (
                 <div
                     key={generateRandomId(16)}
                     className={(() => {
-                        let cls = "smallTab";
+                        let cls = 'smallTab';
                         if (props.selectedTab !== undefined) {
                             if (props.selectedTab === i) {
-                                cls += " selected";
+                                cls += ' selected';
                             }
                             i++;
                         }
@@ -30,21 +30,21 @@ export default function (props: {
                             key={generateRandomId(16)}
                             className={(() => {
                                 if (Math.floor(st / 100) === 1) {
-                                    return "bluePiece";
+                                    return 'bluePiece';
                                 } else if (Math.floor(st / 100) === 2) {
-                                    return "redPiece";
+                                    return 'redPiece';
                                 }
-                                if (props.ended) return "piece";
-                                if (props.nextPlayer > 2) return "piece";
+                                if (props.ended) return 'piece';
+                                if (props.nextPlayer > 2) return 'piece';
                                 if (props.selectedTab !== undefined) {
                                     let i = Math.floor(((st % 100) - 1) / 9);
                                     if (i !== props.selectedTab) {
-                                        return "piece";
+                                        return 'piece';
                                     }
                                 }
                                 return props.nextPlayer === 1
-                                    ? "bluePlaceholder"
-                                    : "redPlaceholder";
+                                    ? 'bluePlaceholder'
+                                    : 'redPlaceholder';
                             })()}
                             onClick={() => {
                                 if (props.ended) return;

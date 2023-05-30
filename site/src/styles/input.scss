@@ -151,9 +151,15 @@ $gray: #50545c;
 
     .timeDisplay {
         padding: 10px;
-        max-width: 50px;
+        max-width: 70px;
         background-color: white;
         margin: 10px auto;
         border-radius: 7px;
     }
+}
+
+.names {
+    max-width: 80%;
+    width: 80%;
+    margin: 20px auto;
 }
