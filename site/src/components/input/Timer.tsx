@@ -1,17 +1,7 @@
-import React from 'react';
+import {Component} from 'react';
+import { TimerProps, TimerState } from '../../types';
 
-interface TimerProps {
-    time: number;
-    paused: boolean;
-    onTick: (n: number) => void;
-    ended: boolean;
-    label?: string;
-}
-interface TimerState {
-    time: number;
-}
-
-export default class extends React.Component<TimerProps, TimerState> {
+export default class extends Component<TimerProps, TimerState> {
     private it: NodeJS.Timer | undefined;
 
     constructor(props: TimerProps) {
@@ -27,10 +17,7 @@ export default class extends React.Component<TimerProps, TimerState> {
                     {this.props.label ? this.props.label : 'Tempo restante:'}
                 </span>
                 <div className='timeDisplay'>
-                    {Math.floor(this.state.time / 600)}:
-                    {Math.floor((this.state.time % 600) / 100)}
-                    {Math.floor(((this.state.time % 600) % 100) / 10)}.
-                    {this.state.time % 10}
+                    {this.getTimeString(this.state.time)}
                 </div>
             </div>
         );
@@ -38,19 +25,28 @@ export default class extends React.Component<TimerProps, TimerState> {
 
     private startTimer() {
         this.it = setInterval(() => {
-            if (this.props.ended) {
-                return this.stopTimer();
-            }
-            if (!this.props.paused) {
-                const t = this.state.time - 1;
-                if (t === 0) this.stopTimer();
-                this.props.onTick(t);
-                this.setState({ time: t});
-            }
+            if (this.props.ended) return this.stopTimer();
+            if (!this.props.paused) this.updateTimer();
         }, 100);
+    }
+
+    private updateTimer() {
+        const time = this.state.time - 1;
+        if (time === 0) this.stopTimer();
+        this.props.onTick(time);
+        this.setState({ time });
     }
 
     private stopTimer() {
         clearInterval(this.it);
+    }
+
+    private getTimeString(time: number) {
+        const minutes = Math.floor(time / 600);
+        const seconds = Math.floor(time / 10) % 60;
+        const secondsDez = Math.floor(seconds / 10);
+        const secondsUnits = seconds % 10;
+        const undreds = time % 10;
+        return `${minutes}:${secondsDez}${secondsUnits}.${undreds}`;
     }
 }

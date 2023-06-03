@@ -124,10 +124,11 @@ export function getSimplifiedTab(smallTab: number[]) {
 
 export function createGame(
     mode: modes,
+    bot: boolean | undefined,
     nome1: string = '',
     nome2: string = ''
 ): gameInfo {
-    return {
+    const jogo: gameInfo = {
         ended: 0,
         mode,
         nextTab: mode === 'hard' ? 4 : undefined,
@@ -136,9 +137,14 @@ export function createGame(
         nome1,
         nome2,
     };
+    if (bot && jogo.player === 2) {
+        jogo.player = 3;
+        return computerPlaySync(jogo);
+    }
+    return jogo;
 }
 
-export function move(
+export function playMove(
     jogo: gameInfo,
     tab: number[][],
     pos: number,
@@ -185,7 +191,7 @@ export async function computerPlay(
     }
     const tab = [...jogo.tab];
     tab[Math.floor(n / 9)][n % 9] += 200;
-    const j = move(jogo, tab, n + 1);
+    const j = playMove(jogo, tab, n + 1);
     setJogo(j);
 }
 
@@ -211,7 +217,7 @@ export function computerPlaySync(jogo: gameInfo): gameInfo {
     }
     const tab = [...jogo.tab];
     tab[Math.floor(n / 9)][n % 9] += 200;
-    const j = move(jogo, tab, n + 1);
+    const j = playMove(jogo, tab, n + 1);
     return j;
 }
 
@@ -230,4 +236,20 @@ export function countAvailableSmall(tab: number[]): number {
         if (Math.floor(tab[i] / 100) !== 0) k--;
     }
     return k;
+}
+
+export function getPieceType(piece: number): number {
+    return Math.floor(piece / 100);
+}
+
+export function getPiecePosition(piece: number): number {
+    return piece % 100;
+}
+
+export function getSmallTabPosition(piece: number): number {
+    return (getPiecePosition(piece) - 1) % 9;
+}
+
+export function getLargeTabPosition(piece: number): number {
+    return Math.floor((getPiecePosition(piece) - 1) / 9);
 }

@@ -2,12 +2,11 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './styles/global.scss';
 import Nav from './components/page/Nav';
 import Footer from './components/page/Footer';
-import SinglePlayer from './pages/SinglePlayer';
-import Computador from './pages/Computador';
 import Pontuacao from './pages/Pontuacao';
 import Relatorio from './pages/Relatorio';
+import Game from './pages/Game';
 
-export default function (props: {}) {
+export default function () {
     const apiURL = 'https://quimmilho.net:600/api';
     return (
         <div className='App'>
@@ -16,7 +15,7 @@ export default function (props: {}) {
                 <Routes>
                     <Route
                         path='/'
-                        element={<SinglePlayer apiURL={apiURL} />}
+                        element={<Game bot={false} apiURL={apiURL} />}
                     ></Route>
                     <Route
                         path='/pontuacao'
@@ -24,12 +23,9 @@ export default function (props: {}) {
                     ></Route>
                     <Route
                         path='/computador'
-                        element={<Computador apiURL={apiURL} />}
+                        element={<Game bot={true} apiURL={apiURL} />}
                     ></Route>
-                    <Route
-                        path='/relatorio'
-                        element={<Relatorio />}
-                    ></Route>
+                    <Route path='/relatorio' element={<Relatorio />}></Route>
                     <Route
                         path='*'
                         element={

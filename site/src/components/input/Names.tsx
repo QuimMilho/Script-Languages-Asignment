@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function (props: {
     nomes: string[];
-    onChange: (v: string[]) => void;
+    onChange: (nomes: string[]) => void;
     startGame: () => void;
     bot?: boolean;
 }) {
@@ -14,22 +14,18 @@ export default function (props: {
             <h2 className='white margintop20'>Jogador 1</h2>
             <TextInput
                 maxLength={100}
-                onChange={(v) => {
-                    const temp = [...props.nomes];
-                    temp[0] = v;
-                    props.onChange(temp);
-                }}
+                onChange={(value) =>
+                    props.onChange(getNomesArray(props.nomes, value, 0))
+                }
                 value={props.nomes[0]}
                 error={error[0]}
             />
             <h2 className='white margintop20'>Jogador 2</h2>
             <TextInput
                 maxLength={100}
-                onChange={(v) => {
-                    const temp = [...props.nomes];
-                    temp[1] = v;
-                    props.onChange(temp);
-                }}
+                onChange={(value) =>
+                    props.onChange(getNomesArray(props.nomes, value, 1))
+                }
                 value={props.nomes[1]}
                 error={error[1]}
                 disabled={props.bot}
@@ -40,28 +36,31 @@ export default function (props: {
                     color='blue'
                     width={200}
                     onClick={() => {
-                        if (props.nomes[0].length <= 3) {
-                            return setError([
-                                'O nome deve ter pelo menos 3 caracteres!',
-                                '',
-                            ]);
-                        }
-                        if (!props.bot && props.nomes[1].length <= 3) {
-                            return setError([
-                                '',
-                                'O nome deve ter pelo menos 3 caracteres!',
-                            ]);
-                        }
-                        if (props.nomes[0] === props.nomes[1]) {
-                            return setError([
-                                'Os nomes não podem ser iguais!',
-                                'Os nomes não podem ser iguais!',
-                            ]);
-                        }
+                        const error = findErrors(props.nomes);
+                        if (error) return setError(error);
                         props.startGame();
                     }}
                 />
             </div>
         </div>
     );
+}
+
+function getNomesArray(nomes: string[], value: string, index: number) {
+    const temp = [...nomes];
+    temp[index] = value;
+    return temp;
+}
+
+function findErrors(nomes: string[]): string[] | undefined {
+    if (nomes[0].length <= 2)
+        return ['O nome deve ter pelo menos 3 caracteres!', ''];
+    if (nomes[1].length <= 2)
+        return ['', 'O nome deve ter pelo menos 3 caracteres!'];
+    if (nomes[0].toLowerCase() === nomes[1].toLowerCase()) 
+        return [
+            'Os nomes não podem ser iguais!',
+            'Os nomes não podem ser iguais!',
+        ];
+    return undefined;
 }

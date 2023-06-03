@@ -1,15 +1,15 @@
-export interface Game {
+export interface APIGame {
     jog1: string;
     jog2: string;
     result: number;
     gameId: number;
-    type: "computer" | "local";
+    type: 'computer' | 'local';
 }
 
 export type modes = 'new' | 'normal' | 'hard';
 export type gamemode = 'normal' | 'hard';
 
-export type gameInfo = {
+export interface gameInfo {
     mode: modes;
     tab: number[][];
     player: number;
@@ -18,3 +18,17 @@ export type gameInfo = {
     nome1: string;
     nome2: string;
 };
+
+export interface option { value: string; label: string };
+
+export interface TimerProps {
+    time: number;
+    paused: boolean;
+    onTick: (n: number) => void;
+    ended: boolean;
+    label?: string;
+}
+
+export interface TimerState {
+    time: number;
+}

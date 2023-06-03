@@ -1,84 +1,103 @@
-import React from "react";
-import "../../styles/input.scss";
+import React from 'react';
+import '../../styles/input.scss';
+import { option } from '../../types';
 
 export default function (props: {
     value?: string;
-    options: { value: string; label: string }[];
-    onChange?: (v: string | undefined) => void;
-    clearable?: boolean;
+    options: option[];
+    onChange?: (value: string | undefined) => void;
 }) {
     const [hidden, setHidden] = React.useState<boolean>(true);
-    const [value, setValue] = React.useState<string | undefined>(props.value);
     return (
-        <div className="select white">
-            <div
-                className="selected"
-                onClick={() => {
-                    hidden ? setHidden(false) : setHidden(true);
+        <div className='select white'>
+            <Selected
+                hidden={hidden}
+                options={props.options}
+                setHidden={(value) => setHidden(value)}
+                value={props.value}
+            />
+            <Options
+                hidden={hidden}
+                onChange={(value) => {
+                    setHidden(true);
+                    if (props.onChange) props.onChange(value);
                 }}
-            >
-                <div className="value">
-                    {(() => {
-                        const o = props.options.find((o) => o.value === value);
-                        if (!o)
-                            return (
-                                <span className="gray">
-                                    Nada Selecionado...
-                                </span>
-                            );
-                        return o.label;
-                    })()}
-                </div>
-                <div className="images">
-                    <img
-                        src="/open.png"
-                        style={{ rotate: hidden ? "0deg" : "180deg" }}
-                    />
-                </div>
-            </div>
-            <div className="options" style={{ zIndex: hidden ? "-1" : "10" }}>
-                {props.clearable ? (
-                    <div
-                        className="gray"
-                        onClick={() => {
-                            setValue(undefined);
-                            if (props.onChange)
-                                clicked(undefined, props.onChange);
-                            hide(setHidden);
-                        }}
-                    >
-                        Nada Selecionado...
-                    </div>
-                ) : undefined}
-                {props.options.length > 0 ? (
-                    props.options.map((o) => (
-                        <div
-                            key={o.value}
-                            onClick={() => {
-                                setValue(o.value);
-                                if (props.onChange)
-                                    clicked(o.value, props.onChange);
-                                hide(setHidden);
-                            }}
-                        >
-                            {o.label}
-                        </div>
-                    ))
-                ) : (
-                    <div className="gray">Não há opções disponíveis...</div>
-                )}
-            </div>
+                options={props.options}
+            />
         </div>
     );
 }
 
-async function clicked(
-    value: string | undefined,
-    onChange: (v: string | undefined) => void
-) {
-    onChange(value);
+function Selected(props: {
+    hidden: boolean;
+    setHidden: (value: boolean) => void;
+    options: option[];
+    value?: string;
+}) {
+    return (
+        <div
+            className='selected'
+            onClick={() =>
+                props.hidden ? props.setHidden(false) : props.setHidden(true)
+            }
+        >
+            <div className='value'>{getValue(props.options, props.value)}</div>
+            <img
+                src='/open.png'
+                style={{ rotate: props.hidden ? '0deg' : '180deg' }}
+                className='images'
+            />
+        </div>
+    );
 }
 
-async function hide(setHidden: (v: boolean) => void) {
-    setHidden(true);
+function Options(props: {
+    hidden: boolean;
+    options: option[];
+    onChange: (value: string) => void;
+}) {
+    if (props.options.length === 0) return <NoOptions hidden={props.hidden} />;
+    return (
+        <OptionList
+            hidden={props.hidden}
+            onChange={props.onChange}
+            options={props.options}
+        />
+    );
+}
+
+function NoOptions(props: { hidden: boolean }) {
+    return (
+        <div className='options' style={{ zIndex: props.hidden ? '-1' : '10' }}>
+            <div className='gray'>Não há opções disponíveis...</div>
+        </div>
+    );
+}
+
+function OptionList(props: {
+    hidden: boolean;
+    options: option[];
+    onChange: (value: string) => void;
+}) {
+    return (
+        <div className='options' style={{ zIndex: props.hidden ? '-1' : '10' }}>
+            {props.options.map((o) => (
+                <Option
+                    key={o.value}
+                    label={o.label}
+                    onClick={() => props.onChange(o.value)}
+                />
+            ))}
+        </div>
+    );
+}
+
+function Option(props: { label: string; onClick: () => void }) {
+    return <div onClick={props.onClick}>{props.label}</div>;
+}
+
+function getValue(options: option[], value?: string) {
+    const o = options.find((o) => o.value === value);
+    if (!o) return <span className='gray'>Nada Selecionado...</span>;
+    return o.label;
 }

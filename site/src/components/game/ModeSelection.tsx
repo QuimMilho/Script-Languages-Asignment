@@ -1,12 +1,12 @@
-import { gameInfo, gamemode } from "../../types";
-import { createGame } from "../../utils";
-import Button from "../input/Button";
-import Select from "../input/Select";
+import { gameInfo, gamemode } from '../../types';
+import { createGame } from '../../utils';
+import Button from '../input/Button';
+import Select from '../input/Select';
 
 export default function (props: {
-    selected: string;
-    setSelected: (v: string) => void;
-    setJogo: (j: gameInfo) => void;
+    selected: gamemode;
+    setSelected: (value: string) => void;
+    setJogo: (jogo: gameInfo) => void;
 }) {
     return (
         <div className='modeSelector margintop20'>
@@ -16,18 +16,13 @@ export default function (props: {
                     { label: 'Ultimate', value: 'hard' },
                 ]}
                 value={props.selected}
-                onChange={(v) => {
-                    props.setSelected(v as gamemode);
-                }}
-                clearable={false}
+                onChange={(value) => props.setSelected(value as gamemode)}
             />
             <Button
                 color='green'
                 text='Novo jogo!'
                 width={200}
-                onClick={() => {
-                    props.setJogo(createGame('new'));
-                }}
+                onClick={() => props.setJogo(createGame('new', false))}
             />
         </div>
     );
