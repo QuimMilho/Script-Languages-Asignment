@@ -7,7 +7,7 @@ import Relatorio from './pages/Relatorio';
 import Game from './pages/Game';
 
 export default function () {
-    const apiURL = 'https://quimmilho.net:600/api';
+    const apiURL = 'https://quimmilho.net:2053/api';
     return (
         <div className='App'>
             <Router>

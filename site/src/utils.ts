@@ -1,4 +1,5 @@
-import { modes, gameInfo } from './types';
+import axios from 'axios';
+import { modes, gameInfo, APIGame, gamemode, APIResults } from './types';
 
 export function createTab(): number[][] {
     let temp: number[][] = [];
@@ -252,4 +253,22 @@ export function getSmallTabPosition(piece: number): number {
 
 export function getLargeTabPosition(piece: number): number {
     return Math.floor((getPiecePosition(piece) - 1) / 9);
+}
+
+export function sendJogo(jogo: gameInfo, apiURL: string) {
+    const data: APIGame = {
+        gameId: 0,
+        jog1: jogo.nome1,
+        jog2: jogo.nome2,
+        result: jogo.ended,
+        type: jogo.mode as gamemode,
+    };
+    axios({ method: 'POST', url: `${apiURL}/game`, data });
+    console.log('sent!')
+}
+
+export async function getGames(apiURL: string): Promise<APIResults[]> {
+    const info = await axios({ method: 'GET', url: `${apiURL}/pontos` });
+    console.log('gotten!');
+    return info.data as APIResults[];
 }

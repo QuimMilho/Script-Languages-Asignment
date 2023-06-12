@@ -35,6 +35,7 @@ export default function (props: { bot: boolean; apiURL: string }) {
                 jogo={jogo}
                 selected={selected}
                 setJogo={(jogo) => setJogo(jogo)}
+                apiURL={props.apiURL}
             />
         </div>
     );
@@ -45,6 +46,7 @@ function GameComponents(props: {
     jogo: gameInfo;
     setJogo: (jogo: gameInfo) => void;
     bot: boolean;
+    apiURL: string;
 }) {
     if (props.jogo.ended)
         return (
@@ -81,9 +83,19 @@ function GameComponents(props: {
         );
     if (props.bot)
         return (
-            <ComputerTab jogo={props.jogo} setJogo={(j) => props.setJogo(j)} />
+            <ComputerTab
+                jogo={props.jogo}
+                setJogo={(j) => props.setJogo(j)}
+                apiURL={props.apiURL}
+            />
         );
-    return <SingleTab jogo={props.jogo} setJogo={(j) => props.setJogo(j)} />;
+    return (
+        <SingleTab
+            jogo={props.jogo}
+            setJogo={(j) => props.setJogo(j)}
+            apiURL={props.apiURL}
+        />
+    );
 }
 
 function NextPlayer(props: {

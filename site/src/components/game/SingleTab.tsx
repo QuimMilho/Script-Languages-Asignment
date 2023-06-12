@@ -1,11 +1,12 @@
 import { gameInfo } from '../../types';
-import { playMove } from '../../utils';
+import { playMove, sendJogo } from '../../utils';
 import Timer from '../input/Timer';
 import Tab from './Tab';
 
 export default function (props: {
     jogo: gameInfo;
     setJogo: (j: gameInfo) => void;
+    apiURL: string;
 }) {
     return (
         <div className='tabuleiroSingle'>
@@ -24,9 +25,11 @@ export default function (props: {
             />
             <Tab
                 jogo={props.jogo}
-                onChange={(tab, pos) =>
-                    props.setJogo(playMove(props.jogo, tab, pos))
-                }
+                onChange={(tab, pos) => {
+                    const jogo = playMove(props.jogo, tab, pos);
+                    props.setJogo(jogo);
+                    if (jogo.ended) sendJogo(jogo, props.apiURL);
+                }}
             />
             <Timer
                 time={3000}
