@@ -32,6 +32,26 @@ $blue: #5e66f4;
         background-color: $green;
     }
 
+    .redPlacement {
+        background-color: lighten($red, 10%);
+    }
+
+    .redPlacementBorder {
+        border: solid lighten($red, 10%) 4px;
+    }
+
+    .bluePlacement {
+        background-color: lighten($blue, 10%);
+    }
+
+    .bluePlacementBorder {
+        border: solid lighten($blue, 10%) 4px;
+    }
+
+    .placementBorder {
+        border: solid white 4px;
+    }
+
     .redPlaceholder {
         background-color: $primary-color;
         &:hover {
@@ -76,27 +96,25 @@ $blue: #5e66f4;
     margin: 20px auto 0 auto;
 }
 
-.singlePlayer {
+.tabuleiroSingle {
     display: flex;
     flex-direction: column;
 
-    .tabuleiroSingle {
-        display: flex;
-        flex-direction: column;
-
-        @media screen and (min-width: 800px) {
-            display: grid;
-            grid-template-columns: 30% 40% 30%;
-        }
+    @media screen and (min-width: 800px) {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
     }
 }
 
-.computer {
+.tabuleiroComp {
     display: flex;
     flex-direction: column;
+}
 
-    .tabuleiroComp {
-        display: flex;
-        flex-direction: column;
-    }
+.redColor {
+    color: $red;
+}
+
+.blueColor {
+    color: $blue;
 }

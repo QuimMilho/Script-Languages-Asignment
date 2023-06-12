@@ -30,7 +30,7 @@ export default function (props: {
                     )
                 }
             />
-            <Tab nextPlayer={1} tab={props.jogo.tab} ended={true} />
+            <Tab jogo={props.jogo} />
         </div>
     );
 }

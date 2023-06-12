@@ -14,12 +14,22 @@ CREATE TABLE `gameHistory` (
 );
 */
 
-export interface Game {
+export type gamemode = 'normal' | 'hard';
+
+export interface APIGame {
     jog1: string;
     jog2: string;
     result: number;
     gameId: number;
-    type: 'computer' | 'local';
+    type: gamemode;
+}
+
+export interface APIResults {
+    name: string;
+    wonNormal: number;
+    lostNormal: number;
+    wonUltimate: number;
+    lostUltimate: number;
 }
 
 const logger = new Logger(`${process.cwd()}/logs`);

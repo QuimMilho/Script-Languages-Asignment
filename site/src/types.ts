@@ -3,7 +3,15 @@ export interface APIGame {
     jog2: string;
     result: number;
     gameId: number;
-    type: 'computer' | 'local';
+    type: gamemode;
+}
+
+export interface APIResults {
+    name: string;
+    wonNormal: number;
+    lostNormal: number;
+    wonUltimate: number;
+    lostUltimate: number;
 }
 
 export type modes = 'new' | 'normal' | 'hard';
@@ -17,9 +25,12 @@ export interface gameInfo {
     ended: number;
     nome1: string;
     nome2: string;
-};
+}
 
-export interface option { value: string; label: string };
+export interface option {
+    value: string;
+    label: string;
+}
 
 export interface TimerProps {
     time: number;

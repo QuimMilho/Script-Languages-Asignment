@@ -152,7 +152,7 @@ export function playMove(
 ) {
     const game = { ...jogo };
     game.player = nextPlayer ? nextPlayer : game.player > 1 ? 1 : 2;
-    game.ended = verifyGame(tab, (v) => {
+    game.ended = verifyGame(game.tab, (v) => {
         game.tab = v;
     });
     if (game.mode === 'hard') {

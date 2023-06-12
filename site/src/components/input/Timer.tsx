@@ -7,7 +7,6 @@ export default class extends Component<TimerProps, TimerState> {
     constructor(props: TimerProps) {
         super(props);
         this.state = { time: this.props.time };
-        this.startTimer();
     }
 
     render() {
@@ -21,6 +20,10 @@ export default class extends Component<TimerProps, TimerState> {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        this.startTimer();
     }
 
     private startTimer() {

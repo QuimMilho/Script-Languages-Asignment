@@ -36,7 +36,7 @@ export default function (props: {
                     color='blue'
                     width={200}
                     onClick={() => {
-                        const error = findErrors(props.nomes);
+                        const error = findErrors(props.nomes, props.bot);
                         if (error) return setError(error);
                         props.startGame();
                     }}
@@ -52,12 +52,18 @@ function getNomesArray(nomes: string[], value: string, index: number) {
     return temp;
 }
 
-function findErrors(nomes: string[]): string[] | undefined {
+function findErrors(nomes: string[], bot?: boolean): string[] | undefined {
     if (nomes[0].length <= 2)
         return ['O nome deve ter pelo menos 3 caracteres!', ''];
+    if (nomes[0].toUpperCase() === 'BOT') {
+        return ['O nome não pode ser BOT!', ''];
+    }
     if (nomes[1].length <= 2)
         return ['', 'O nome deve ter pelo menos 3 caracteres!'];
-    if (nomes[0].toLowerCase() === nomes[1].toLowerCase()) 
+    if (!bot && nomes[1].toUpperCase() === 'BOT') {
+        return ['', 'O nome não pode ser BOT!'];
+    }
+    if (nomes[0].toLowerCase() === nomes[1].toLowerCase())
         return [
             'Os nomes não podem ser iguais!',
             'Os nomes não podem ser iguais!',

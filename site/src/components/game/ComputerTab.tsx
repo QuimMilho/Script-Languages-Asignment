@@ -23,10 +23,7 @@ export default function (props: {
                 label={`Jogador ${props.jogo.nome1}:`}
             />
             <Tab
-                nextPlayer={props.jogo.player}
-                tab={props.jogo.tab}
-                ended={props.jogo.ended !== 0}
-                selectedTab={props.jogo.nextTab}
+                jogo={props.jogo}
                 onChange={(tab, pos) => {
                     const jogo = playMove(props.jogo, tab, pos, 3);
                     props.setJogo(jogo);
