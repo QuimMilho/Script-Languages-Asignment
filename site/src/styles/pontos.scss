@@ -1,0 +1,36 @@
+.pontos {
+    max-width: 80%;
+    margin: 10px auto;
+
+    ul {
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+    }
+
+    li {
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .title {
+        display: grid;
+        grid-template-columns: 3fr repeat(4, 1fr);
+        color: white;
+        font-weight: bold;
+        border-bottom: solid 2px white;
+
+        li {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .value {
+        display: grid;
+        grid-template-columns: 3fr repeat(4, 1fr);
+        color: white;
+        margin-top: 10px;
+    }
+}

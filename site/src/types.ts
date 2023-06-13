@@ -14,6 +14,16 @@ export interface APIResults {
     lostUltimate: number;
 }
 
+export interface EAPIResults extends APIResults {
+    randomId: string;
+}
+
+export type sortSelect =
+    | 'name'
+    | 'wonNormal'
+    | 'wonUltimate'
+    | 'lostNormal'
+    | 'lostUltimate'; 
 export type modes = 'new' | 'normal' | 'hard';
 export type gamemode = 'normal' | 'hard';
 

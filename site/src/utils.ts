@@ -264,11 +264,9 @@ export function sendJogo(jogo: gameInfo, apiURL: string) {
         type: jogo.mode as gamemode,
     };
     axios({ method: 'POST', url: `${apiURL}/game`, data });
-    console.log('sent!')
 }
 
 export async function getGames(apiURL: string): Promise<APIResults[]> {
     const info = await axios({ method: 'GET', url: `${apiURL}/pontos` });
-    console.log('gotten!');
     return info.data as APIResults[];
 }
