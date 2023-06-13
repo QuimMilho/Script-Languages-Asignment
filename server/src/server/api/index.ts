@@ -11,8 +11,12 @@ apiRouter.get('/pontos', async (req, res) => {
     )) as APIGame[];
     for (let i = 0; i < games.length; i++) {
         const game = games[i];
-        let player: APIResults = data.find((d) => d.name === game.jog1);
-        let player2: APIResults = data.find((d) => d.name === game.jog2);
+        let player: APIResults = data.find(
+            (d) => d.name.toLowerCase() === game.jog1.toLowerCase()
+        );
+        let player2: APIResults = data.find(
+            (d) => d.name.toLowerCase() === game.jog2.toLowerCase()
+        );
         if (!player) {
             data.push({
                 lostNormal: 0,
@@ -21,7 +25,9 @@ apiRouter.get('/pontos', async (req, res) => {
                 wonNormal: 0,
                 wonUltimate: 0,
             });
-            player = data.find((d) => d.name === game.jog1);
+            player = data.find(
+                (d) => d.name.toLowerCase() === game.jog1.toLowerCase()
+            );
         }
         if (!player2) {
             data.push({
@@ -31,7 +37,9 @@ apiRouter.get('/pontos', async (req, res) => {
                 wonNormal: 0,
                 wonUltimate: 0,
             });
-            player2 = data.find((d) => d.name === game.jog2);
+            player2 = data.find(
+                (d) => d.name.toLowerCase() === game.jog2.toLowerCase()
+            );
         }
         if (game.result === 1) {
             if (game.type === 'hard') {
