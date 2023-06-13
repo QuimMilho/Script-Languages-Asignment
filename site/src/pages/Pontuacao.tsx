@@ -17,7 +17,9 @@ export default function (props: { apiURL: string }) {
                 }}
             />
             {results.length === 0 ? (
-                <div></div>
+                <div className='white centered margintop20'>
+                    Não há nenhuma pontuação registada!
+                </div>
             ) : (
                 results.map((v) => (
                     <Value value={v} key={generateRandomId(16)} />
