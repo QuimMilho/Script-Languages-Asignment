@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import { TimerProps, TimerState } from '../../types';
 
 export default class extends Component<TimerProps, TimerState> {
@@ -24,6 +24,10 @@ export default class extends Component<TimerProps, TimerState> {
 
     componentDidMount() {
         this.startTimer();
+    }
+
+    componentWillUnmount() {
+        if (this.it) this.stopTimer();
     }
 
     private startTimer() {
