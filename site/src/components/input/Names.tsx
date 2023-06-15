@@ -56,12 +56,12 @@ function findErrors(nomes: string[], bot?: boolean): string[] | undefined {
     if (nomes[0].length <= 2)
         return ['O nome deve ter pelo menos 3 caracteres!', ''];
     if (nomes[0].toUpperCase() === 'BOT') {
-        return ['O nome não pode ser BOT!', ''];
+        return ['O nome não pode ser "BOT"!', ''];
     }
     if (nomes[1].length <= 2)
         return ['', 'O nome deve ter pelo menos 3 caracteres!'];
     if (!bot && nomes[1].toUpperCase() === 'BOT') {
-        return ['', 'O nome não pode ser BOT!'];
+        return ['', 'O nome não pode ser "BOT"!'];
     }
     if (nomes[0].toLowerCase() === nomes[1].toLowerCase())
         return [

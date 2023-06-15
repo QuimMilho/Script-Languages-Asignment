@@ -13,7 +13,11 @@ export default function (props: {
     return (
         <div className='margintop20'>
             <h2 className='white centered'>
-                O jogador {props.jogo[`nome${props.winner}`]} ganhou!
+                O jogador{' '}
+                <span className={props.winner === 1 ? 'blueColor' : 'redColor'}>
+                    {props.jogo[`nome${props.winner}`]}
+                </span>{' '}
+                ganhou!
             </h2>
             <Button
                 color='blue'
